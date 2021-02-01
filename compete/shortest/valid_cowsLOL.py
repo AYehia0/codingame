@@ -1,0 +1,66 @@
+"""
+
+
+Given a cows number your job is to decide if next n numbers are Valid or Invalid. The number is Invalid if there is the same digit in cows number and the given number on the same position (with the same index).
+
+cows variable name comes from Bulls and Cows game where you can decrease the set of possible solutions when you know the number have all cows.
+Input
+Line 1: An integer n for the number of the numbers to be checked.
+Line 2: The string with number cows with all cows.
+Next n lines: Strings of digits to be compared with the cows.
+Output
+n lines: Valid or Invalid statement
+The input is valid if cows and the input does not have the same digit in the same place eg.:
+123 and 312 are Valid
+123 and 321 are Invalid
+Constraints
+0 < n < 20
+0 < len(cows) < 15 (no zero digit at the beginning)
+Numbers to be checked have the same length as cows
+Numbers to be checked have the same digits as cows
+All digits in a number are different
+No number starts with 0
+Example
+Input
+4
+123
+231
+231
+321
+312
+Output
+Valid
+Valid
+Invalid
+Valid
+
+
+"""
+
+# not short but it works, it works but it's bad!!!!
+
+n = int(input())
+cows = input()
+for k in range(n):
+    x = input()
+    ans = []
+    for i in range(len(cows)):
+        if cows[i] == x[i]:
+            ans.append(1)
+        else:
+            ans.append(0)
+    if sum(ans) >= 1:
+        print("invalid")
+    else:
+        print("valid")
+
+
+#shortest 
+
+u=input
+n=int(u())
+c=u()
+while n:
+    n-=1
+    x=u()
+    print("Invalid"if [i for i in range(len(c))if x[i]==c[i]]else"Valid")
