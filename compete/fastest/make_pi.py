@@ -1,0 +1,38 @@
+"""
+
+10
+0.44665087470084275 0.7814409871720857
+0.7041731240004209 0.4788892619817777
+0.5886575238238624 0.7324955170095947
+0.6565434828324502 0.7039153745498603
+0.5775729855984102 0.3079992953472084
+0.5172871993693507 0.8574159866720961
+0.31215370368367445 0.5742290301153288
+0.5068821107488173 0.827249751259953
+0.47115127211491314 0.7567791894886847
+0.7243752278897876 0.718696681541423
+
+
+"""
+
+import sys
+import math
+
+# Auto-generated code below aims at helping you parse
+# the standard input according to the problem statement.
+
+number = int(input())
+
+inside  = 0
+outside = 0
+
+for i in range(number):
+    x, y = [float(j) for j in input().split()]
+    if math.sqrt((x)**2 + (y)**2) >= 1:
+        inside += 1
+    else:
+        outside += 1
+
+
+
+print(4*(outside/inside))
