@@ -1,49 +1,55 @@
 import sys
 import math
-import string 
+import string
 
-words = string.ascii_uppercase
+letters = string.ascii_uppercase
+
+def update_message(msg, p_num):
+    new_msg = ""
+    for ind, i in enumerate(msg):
+        ind = ind if p_num > 0 else -ind
+        ind_letters = letters.index(i) + p_num + ind
+        new_msg += letters[ind_letters % len(letters)]
+        
+    return new_msg
+
+
+def encode(msg, rotors):
+    
+    for rotor in rotors:
+        n_msg = ""
+        for i in msg:
+            n_msg += rotor[letters.index(i)]
+
+        msg = n_msg
+
+    return msg
+
+def decode(msg, rotors):
+    
+    for rotor in reversed(rotors):
+        n_msg = ""
+        for i in msg:
+            n_msg += letters[rotor.index(i)]
+        msg = n_msg
+
+    return msg
+
 
 operation = input()
-pseudo_random_number = int(input())
-rotors = []
+p_num = int(input())
+rotors = list()
 for i in range(3):
     rotor = input()
     rotors.append(rotor)
 message = input()
 
-to_fix = list(message)
+if operation == 'ENCODE':
+    n_message = update_message(message, p_num)
+    n_message = encode(n_message, rotors)
+else:
+    n_message = decode(message, rotors)
+    n_message = update_message(n_message, -1*p_num)
+    
 
-print(to_fix[0])
-
-# first position 
-z = ord(to_fix[0]) + pseudo_random_number
-f = chr(z)
-
-first = [f]
-print(first)
-
-for i in range(1, len(message)):
-    z = ord(f) + 1
-    first.append(chr(z))
-    f = chr(z)
-
-print(first)
-# first rotor 
-rotor1 = ''
-for i in first:
-    rotor1 += rotors[0][words.index(i)]
-
-
-# second rotor 
-rotor2 = ''
-for i in rotor1:
-    rotor2 += rotors[1][words.index(i)]
-
-# third rotor 
-rotor3 = ''
-for i in rotor2:
-    rotor3 += rotors[2][words.index(i)]
-
-
-print(rotor3)
+print(n_message)
